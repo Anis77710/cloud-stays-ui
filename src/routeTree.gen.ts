@@ -9,61 +9,373 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppRouteImport } from './routes/_app'
+import { Route as AppIndexRouteImport } from './routes/_app.index'
+import { Route as AppStaffRouteImport } from './routes/_app.staff'
+import { Route as AppSpaRouteImport } from './routes/_app.spa'
+import { Route as AppSettingsRouteImport } from './routes/_app.settings'
+import { Route as AppRoomsRouteImport } from './routes/_app.rooms'
+import { Route as AppRestaurantRouteImport } from './routes/_app.restaurant'
+import { Route as AppReservationsRouteImport } from './routes/_app.reservations'
+import { Route as AppReportsRouteImport } from './routes/_app.reports'
+import { Route as AppProfileRouteImport } from './routes/_app.profile'
+import { Route as AppMessagesRouteImport } from './routes/_app.messages'
+import { Route as AppInventoryRouteImport } from './routes/_app.inventory'
+import { Route as AppHousekeepingRouteImport } from './routes/_app.housekeeping'
+import { Route as AppGuestsRouteImport } from './routes/_app.guests'
+import { Route as AppFinanceRouteImport } from './routes/_app.finance'
+import { Route as AppEventsRouteImport } from './routes/_app.events'
 
-const IndexRoute = IndexRouteImport.update({
+const AppRoute = AppRouteImport.update({
+  id: '/_app',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppIndexRoute = AppIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AppRoute,
+} as any)
+const AppStaffRoute = AppStaffRouteImport.update({
+  id: '/staff',
+  path: '/staff',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSpaRoute = AppSpaRouteImport.update({
+  id: '/spa',
+  path: '/spa',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSettingsRoute = AppSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppRoomsRoute = AppRoomsRouteImport.update({
+  id: '/rooms',
+  path: '/rooms',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppRestaurantRoute = AppRestaurantRouteImport.update({
+  id: '/restaurant',
+  path: '/restaurant',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppReservationsRoute = AppReservationsRouteImport.update({
+  id: '/reservations',
+  path: '/reservations',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppReportsRoute = AppReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppProfileRoute = AppProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppMessagesRoute = AppMessagesRouteImport.update({
+  id: '/messages',
+  path: '/messages',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppInventoryRoute = AppInventoryRouteImport.update({
+  id: '/inventory',
+  path: '/inventory',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppHousekeepingRoute = AppHousekeepingRouteImport.update({
+  id: '/housekeeping',
+  path: '/housekeeping',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppGuestsRoute = AppGuestsRouteImport.update({
+  id: '/guests',
+  path: '/guests',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppFinanceRoute = AppFinanceRouteImport.update({
+  id: '/finance',
+  path: '/finance',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppEventsRoute = AppEventsRouteImport.update({
+  id: '/events',
+  path: '/events',
+  getParentRoute: () => AppRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof AppIndexRoute
+  '/events': typeof AppEventsRoute
+  '/finance': typeof AppFinanceRoute
+  '/guests': typeof AppGuestsRoute
+  '/housekeeping': typeof AppHousekeepingRoute
+  '/inventory': typeof AppInventoryRoute
+  '/messages': typeof AppMessagesRoute
+  '/profile': typeof AppProfileRoute
+  '/reports': typeof AppReportsRoute
+  '/reservations': typeof AppReservationsRoute
+  '/restaurant': typeof AppRestaurantRoute
+  '/rooms': typeof AppRoomsRoute
+  '/settings': typeof AppSettingsRoute
+  '/spa': typeof AppSpaRoute
+  '/staff': typeof AppStaffRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/events': typeof AppEventsRoute
+  '/finance': typeof AppFinanceRoute
+  '/guests': typeof AppGuestsRoute
+  '/housekeeping': typeof AppHousekeepingRoute
+  '/inventory': typeof AppInventoryRoute
+  '/messages': typeof AppMessagesRoute
+  '/profile': typeof AppProfileRoute
+  '/reports': typeof AppReportsRoute
+  '/reservations': typeof AppReservationsRoute
+  '/restaurant': typeof AppRestaurantRoute
+  '/rooms': typeof AppRoomsRoute
+  '/settings': typeof AppSettingsRoute
+  '/spa': typeof AppSpaRoute
+  '/staff': typeof AppStaffRoute
+  '/': typeof AppIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/_app': typeof AppRouteWithChildren
+  '/_app/events': typeof AppEventsRoute
+  '/_app/finance': typeof AppFinanceRoute
+  '/_app/guests': typeof AppGuestsRoute
+  '/_app/housekeeping': typeof AppHousekeepingRoute
+  '/_app/inventory': typeof AppInventoryRoute
+  '/_app/messages': typeof AppMessagesRoute
+  '/_app/profile': typeof AppProfileRoute
+  '/_app/reports': typeof AppReportsRoute
+  '/_app/reservations': typeof AppReservationsRoute
+  '/_app/restaurant': typeof AppRestaurantRoute
+  '/_app/rooms': typeof AppRoomsRoute
+  '/_app/settings': typeof AppSettingsRoute
+  '/_app/spa': typeof AppSpaRoute
+  '/_app/staff': typeof AppStaffRoute
+  '/_app/': typeof AppIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/events'
+    | '/finance'
+    | '/guests'
+    | '/housekeeping'
+    | '/inventory'
+    | '/messages'
+    | '/profile'
+    | '/reports'
+    | '/reservations'
+    | '/restaurant'
+    | '/rooms'
+    | '/settings'
+    | '/spa'
+    | '/staff'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/events'
+    | '/finance'
+    | '/guests'
+    | '/housekeeping'
+    | '/inventory'
+    | '/messages'
+    | '/profile'
+    | '/reports'
+    | '/reservations'
+    | '/restaurant'
+    | '/rooms'
+    | '/settings'
+    | '/spa'
+    | '/staff'
+    | '/'
+  id:
+    | '__root__'
+    | '/_app'
+    | '/_app/events'
+    | '/_app/finance'
+    | '/_app/guests'
+    | '/_app/housekeeping'
+    | '/_app/inventory'
+    | '/_app/messages'
+    | '/_app/profile'
+    | '/_app/reports'
+    | '/_app/reservations'
+    | '/_app/restaurant'
+    | '/_app/rooms'
+    | '/_app/settings'
+    | '/_app/spa'
+    | '/_app/staff'
+    | '/_app/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/_app': {
+      id: '/_app'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_app/': {
+      id: '/_app/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/staff': {
+      id: '/_app/staff'
+      path: '/staff'
+      fullPath: '/staff'
+      preLoaderRoute: typeof AppStaffRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/spa': {
+      id: '/_app/spa'
+      path: '/spa'
+      fullPath: '/spa'
+      preLoaderRoute: typeof AppSpaRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/settings': {
+      id: '/_app/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AppSettingsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/rooms': {
+      id: '/_app/rooms'
+      path: '/rooms'
+      fullPath: '/rooms'
+      preLoaderRoute: typeof AppRoomsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/restaurant': {
+      id: '/_app/restaurant'
+      path: '/restaurant'
+      fullPath: '/restaurant'
+      preLoaderRoute: typeof AppRestaurantRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/reservations': {
+      id: '/_app/reservations'
+      path: '/reservations'
+      fullPath: '/reservations'
+      preLoaderRoute: typeof AppReservationsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/reports': {
+      id: '/_app/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof AppReportsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/profile': {
+      id: '/_app/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AppProfileRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/messages': {
+      id: '/_app/messages'
+      path: '/messages'
+      fullPath: '/messages'
+      preLoaderRoute: typeof AppMessagesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/inventory': {
+      id: '/_app/inventory'
+      path: '/inventory'
+      fullPath: '/inventory'
+      preLoaderRoute: typeof AppInventoryRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/housekeeping': {
+      id: '/_app/housekeeping'
+      path: '/housekeeping'
+      fullPath: '/housekeeping'
+      preLoaderRoute: typeof AppHousekeepingRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/guests': {
+      id: '/_app/guests'
+      path: '/guests'
+      fullPath: '/guests'
+      preLoaderRoute: typeof AppGuestsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/finance': {
+      id: '/_app/finance'
+      path: '/finance'
+      fullPath: '/finance'
+      preLoaderRoute: typeof AppFinanceRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/events': {
+      id: '/_app/events'
+      path: '/events'
+      fullPath: '/events'
+      preLoaderRoute: typeof AppEventsRouteImport
+      parentRoute: typeof AppRoute
     }
   }
 }
 
+interface AppRouteChildren {
+  AppEventsRoute: typeof AppEventsRoute
+  AppFinanceRoute: typeof AppFinanceRoute
+  AppGuestsRoute: typeof AppGuestsRoute
+  AppHousekeepingRoute: typeof AppHousekeepingRoute
+  AppInventoryRoute: typeof AppInventoryRoute
+  AppMessagesRoute: typeof AppMessagesRoute
+  AppProfileRoute: typeof AppProfileRoute
+  AppReportsRoute: typeof AppReportsRoute
+  AppReservationsRoute: typeof AppReservationsRoute
+  AppRestaurantRoute: typeof AppRestaurantRoute
+  AppRoomsRoute: typeof AppRoomsRoute
+  AppSettingsRoute: typeof AppSettingsRoute
+  AppSpaRoute: typeof AppSpaRoute
+  AppStaffRoute: typeof AppStaffRoute
+  AppIndexRoute: typeof AppIndexRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppEventsRoute: AppEventsRoute,
+  AppFinanceRoute: AppFinanceRoute,
+  AppGuestsRoute: AppGuestsRoute,
+  AppHousekeepingRoute: AppHousekeepingRoute,
+  AppInventoryRoute: AppInventoryRoute,
+  AppMessagesRoute: AppMessagesRoute,
+  AppProfileRoute: AppProfileRoute,
+  AppReportsRoute: AppReportsRoute,
+  AppReservationsRoute: AppReservationsRoute,
+  AppRestaurantRoute: AppRestaurantRoute,
+  AppRoomsRoute: AppRoomsRoute,
+  AppSettingsRoute: AppSettingsRoute,
+  AppSpaRoute: AppSpaRoute,
+  AppStaffRoute: AppStaffRoute,
+  AppIndexRoute: AppIndexRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  AppRoute: AppRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
