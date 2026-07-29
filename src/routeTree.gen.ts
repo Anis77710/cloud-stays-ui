@@ -10,32 +10,82 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AppRouteImport } from './routes/_app'
+import { Route as AppIndexRouteImport } from './routes/_app.index'
+import { Route as AppRoomsRouteImport } from './routes/_app.rooms'
+import { Route as AppReservationsRouteImport } from './routes/_app.reservations'
+import { Route as AppHousekeepingRouteImport } from './routes/_app.housekeeping'
+import { Route as AppGuestsRouteImport } from './routes/_app.guests'
 
 const AppRoute = AppRouteImport.update({
   id: '/_app',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppIndexRoute = AppIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppRoomsRoute = AppRoomsRouteImport.update({
+  id: '/rooms',
+  path: '/rooms',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppReservationsRoute = AppReservationsRouteImport.update({
+  id: '/reservations',
+  path: '/reservations',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppHousekeepingRoute = AppHousekeepingRouteImport.update({
+  id: '/housekeeping',
+  path: '/housekeeping',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppGuestsRoute = AppGuestsRouteImport.update({
+  id: '/guests',
+  path: '/guests',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof AppRoute
+  '/': typeof AppIndexRoute
+  '/guests': typeof AppGuestsRoute
+  '/housekeeping': typeof AppHousekeepingRoute
+  '/reservations': typeof AppReservationsRoute
+  '/rooms': typeof AppRoomsRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof AppRoute
+  '/guests': typeof AppGuestsRoute
+  '/housekeeping': typeof AppHousekeepingRoute
+  '/reservations': typeof AppReservationsRoute
+  '/rooms': typeof AppRoomsRoute
+  '/': typeof AppIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/_app': typeof AppRoute
+  '/_app': typeof AppRouteWithChildren
+  '/_app/guests': typeof AppGuestsRoute
+  '/_app/housekeeping': typeof AppHousekeepingRoute
+  '/_app/reservations': typeof AppReservationsRoute
+  '/_app/rooms': typeof AppRoomsRoute
+  '/_app/': typeof AppIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/guests' | '/housekeeping' | '/reservations' | '/rooms'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/_app'
+  to: '/guests' | '/housekeeping' | '/reservations' | '/rooms' | '/'
+  id:
+    | '__root__'
+    | '/_app'
+    | '/_app/guests'
+    | '/_app/housekeeping'
+    | '/_app/reservations'
+    | '/_app/rooms'
+    | '/_app/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  AppRoute: typeof AppRoute
+  AppRoute: typeof AppRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -47,11 +97,64 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_app/': {
+      id: '/_app/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/rooms': {
+      id: '/_app/rooms'
+      path: '/rooms'
+      fullPath: '/rooms'
+      preLoaderRoute: typeof AppRoomsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/reservations': {
+      id: '/_app/reservations'
+      path: '/reservations'
+      fullPath: '/reservations'
+      preLoaderRoute: typeof AppReservationsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/housekeeping': {
+      id: '/_app/housekeeping'
+      path: '/housekeeping'
+      fullPath: '/housekeeping'
+      preLoaderRoute: typeof AppHousekeepingRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/guests': {
+      id: '/_app/guests'
+      path: '/guests'
+      fullPath: '/guests'
+      preLoaderRoute: typeof AppGuestsRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
+interface AppRouteChildren {
+  AppGuestsRoute: typeof AppGuestsRoute
+  AppHousekeepingRoute: typeof AppHousekeepingRoute
+  AppReservationsRoute: typeof AppReservationsRoute
+  AppRoomsRoute: typeof AppRoomsRoute
+  AppIndexRoute: typeof AppIndexRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppGuestsRoute: AppGuestsRoute,
+  AppHousekeepingRoute: AppHousekeepingRoute,
+  AppReservationsRoute: AppReservationsRoute,
+  AppRoomsRoute: AppRoomsRoute,
+  AppIndexRoute: AppIndexRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  AppRoute: AppRoute,
+  AppRoute: AppRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
